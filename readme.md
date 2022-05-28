@@ -1,5 +1,7 @@
 # Flask Kubernetes
 
+Read the blog post: [Running Flask frontend and backend in Kubernetes](https://mikaelahonen.com/en/blog/running-flask-frontend-and-backend-in-kubernetes/).
+
 ## Preparation
 
 [Install docker](https://dev.solita.fi/2021/12/21/docker-on-wsl2-without-docker-desktop.html)
