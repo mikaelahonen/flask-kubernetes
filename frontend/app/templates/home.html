@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <h1>Flask Kubernetes frontend</h1>
+  <p>This is a Flask application that runs as a Docker container inside Kubernetes Minikube on my Laptop.</p>
+  <p>
+    <span>Message from backend: </span>
+    <code id="backend-msg">None</code>
+  </p>
+  <script>
+
+      fetch("http://localhost:5200/msg/")
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        let mountPoint = document.getElementById("backend-msg")
+        mountPoint.innerHTML = data.msg
+      });
+  </script>
+  
+{% endblock %}
