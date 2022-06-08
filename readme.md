@@ -1,6 +1,6 @@
 # Flask Kubernetes
 
-Read the blog post: [Running Flask frontend and backend in Kubernetes](https://mikaelahonen.com/en/blog/running-flask-frontend-and-backend-in-kubernetes/).
+Read the related blog post: [Running Flask frontend and backend in Kubernetes](https://mikaelahonen.com/en/blog/running-flask-frontend-and-backend-in-kubernetes/).
 
 ## Preparation
 
@@ -8,32 +8,58 @@ Read the blog post: [Running Flask frontend and backend in Kubernetes](https://m
 
 [Install minikube](https://minikube.sigs.k8s.io/docs/start/)
 
-Run
+## Deploy
+
+Run the following commands in shell 1.
+
+Start Kubernetes:
 ```
 minikube start
 ```
 
-## Flask containers
-
-Run
+Make current environment available in Kubernetes:
 ```
 eval $(minikube docker-env)
+```
+
+Build Docker images
+```
 docker build -t flask-frontend -f frontend/Dockerfile ./frontend
 docker build -t flask-backend -f backend/Dockerfile ./backend
-docker image prune -f
+#docker image prune -f
+```
+
+Load Docker images to Kubernetes
+```
 minikube image load flask-frontend:latest
 minikube image load flask-backend:latest
+```
+
+Deploy the Flask applications:
+```
 kubectl delete deploy flask-deployment
 kubectl create -f ./k8s_deployment.yml
+```
+
+Publish the Flask applications:
+```
 kubectl delete service flask-services
 kubectl create -f ./k8s_service.yml
+```
+
+Confirm that services exist:
+```
 kubectl get services
+```
+
+Expose services to the host:
+```
 minikube tunnel
 ```
 
 ## Review the app
 
-Open minikube dashboard and see if deployments succeeded. Run in a new terminal:
+Open minikube dashboard and see if deployments succeeded. Run in shell 3:
 ```
 minikube dashboard
 ```
