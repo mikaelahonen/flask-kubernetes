@@ -59,7 +59,7 @@ minikube tunnel
 
 ## Review the app
 
-Open minikube dashboard and see if deployments succeeded. Run in shell 3:
+Open minikube dashboard and see if deployments succeeded. Run in shell 2:
 ```
 minikube dashboard
 ```
